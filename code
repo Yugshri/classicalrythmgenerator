@@ -1,0 +1,40 @@
+import random
+import time
+import simpleaudio as sa
+
+# Define classical rhythms
+rhythms = {
+    "Teentaal": ["Dha", "Dhin", "Dhin", "Dha", "Dha", "Dhin", "Dhin", "Dha", "Dha", "Tin", "Tin", "Ta", "Ta", "Dhin", "Dhin", "Dha"],
+    "Ektaal": ["Dhin", "Dhin", "Dha", "Tin", "Dha", "Dhin", "Dhin", "Dha", "Tin", "Dha"],
+    "Keherwa": ["Dha", "Ge", "Na", "Ti", "Na", "Ka", "Dhi", "Na"],
+    "Dadra": ["Dha", "Dhi", "Na", "Dha", "Ti", "Na"],
+    "Western Waltz": ["1", "2", "3"],
+    "Rock Beat": ["Kick", "Snare", "Hi-Hat", "Kick", "Snare"]
+}
+
+def play_rhythm(rhythm_name, bpm=120):
+    if rhythm_name not in rhythms:
+        print("Rhythm not found!")
+        return
+    
+    pattern = rhythms[rhythm_name]
+    beat_time = 60 / bpm
+    
+    print(f"\nPlaying {rhythm_name} at {bpm} BPM:")
+    for beat in pattern:
+        print(beat)
+        time.sleep(beat_time)
+        
+        # Optional: Play sound
+        wave_obj = sa.WaveObject.from_wave_file("click.wav")
+        wave_obj.play()
+
+if __name__ == "__main__":
+    print("Classical Rhythm Generator\n")
+    print("Available rhythms:")
+    for rhythm in rhythms.keys():
+        print(f"- {rhythm}")
+    
+    choice = input("\nSelect a rhythm: ")
+    bpm = int(input("Enter BPM (beats per minute): "))
+    play_rhythm(choice, bpm)
